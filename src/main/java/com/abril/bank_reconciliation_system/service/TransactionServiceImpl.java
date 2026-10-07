@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.abril.bank_reconciliation_system.dto.TransactionRequest;
 import com.abril.bank_reconciliation_system.dto.TransactionResponse;
 import com.abril.bank_reconciliation_system.entity.Transaction;
+import com.abril.bank_reconciliation_system.exception.ResourceNotFoundException;
 import com.abril.bank_reconciliation_system.repository.TransactionRepository;
 
 @Service
@@ -36,7 +37,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionResponse getTransactionById(Long id) {
-        Transaction transaction = transactionRepository.findById(id).orElseThrow();
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(
+            ()-> new ResourceNotFoundException("Transaction not found")
+        );
         return toResponse(transaction);
     }
 
