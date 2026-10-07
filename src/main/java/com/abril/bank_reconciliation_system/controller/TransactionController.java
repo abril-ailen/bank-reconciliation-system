@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abril.bank_reconciliation_system.entity.Transaction;
+import com.abril.bank_reconciliation_system.dto.TransactionRequest;
+import com.abril.bank_reconciliation_system.dto.TransactionResponse;
 import com.abril.bank_reconciliation_system.service.TransactionService;
 
 @RestController
@@ -25,18 +26,18 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
+    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody TransactionRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(transactionService.createTransaction(transaction));
+                .body(transactionService.createTransaction(request));
     }
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> getAllTransactions() {
+    public ResponseEntity<List<TransactionResponse>> getAllTransactions() {
         return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id) {
+    public ResponseEntity<TransactionResponse> getTransactionById(@PathVariable Long id) {
         return ResponseEntity.ok(transactionService.getTransactionById(id));
     }
 }

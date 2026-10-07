@@ -2,12 +2,13 @@ package com.abril.bank_reconciliation_system.service;
 
 import java.util.List;
 
-import com.abril.bank_reconciliation_system.entity.Transaction;
+import com.abril.bank_reconciliation_system.dto.TransactionRequest;
+import com.abril.bank_reconciliation_system.dto.TransactionResponse;
 
 public interface TransactionService {
-    Transaction createTransaction(Transaction transaction);
+    TransactionResponse createTransaction(TransactionRequest request);
 
-    Transaction getTransactionById(Long id);
+    TransactionResponse getTransactionById(Long id);
 
-    List<Transaction> getAllTransactions();
+    List<TransactionResponse> getAllTransactions();
 }
