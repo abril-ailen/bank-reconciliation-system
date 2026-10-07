@@ -15,6 +15,8 @@ import com.abril.bank_reconciliation_system.dto.TransactionRequest;
 import com.abril.bank_reconciliation_system.dto.TransactionResponse;
 import com.abril.bank_reconciliation_system.service.TransactionService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -26,7 +28,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody TransactionRequest request) {
+    public ResponseEntity<TransactionResponse> createTransaction(@RequestBody @Valid TransactionRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(transactionService.createTransaction(request));
     }
