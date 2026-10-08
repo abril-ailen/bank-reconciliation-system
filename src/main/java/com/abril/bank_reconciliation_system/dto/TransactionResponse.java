@@ -15,4 +15,5 @@ public class TransactionResponse {
     private LocalDate transactionDate;
     private String description;
     private String status;
+    private Long bankTransactionId;
 }

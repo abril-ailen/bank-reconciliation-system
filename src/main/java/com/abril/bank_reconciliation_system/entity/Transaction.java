@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,5 +25,8 @@ public class Transaction {
     private String description;
     private String status;
 
+    @OneToOne
+    @JoinColumn(name = "bank_transaction_id", unique = true)
+    private BankTransaction bankTransaction;
 
 }

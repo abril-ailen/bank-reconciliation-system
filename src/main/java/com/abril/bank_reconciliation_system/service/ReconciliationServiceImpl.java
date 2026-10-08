@@ -46,6 +46,7 @@ public class ReconciliationServiceImpl implements ReconciliationService {
                         && transaction.getAmount().compareTo(bankTransaction.getAmount()) == 0
                         && transaction.getTransactionDate().equals(bankTransaction.getTransactionDate())) {
                     transaction.setStatus("MATCHED");
+                    transaction.setBankTransaction(bankTransaction);
                     usedBankTransactionIds.add(bankTransaction.getId());
                     foundMatch = true;
                     matchedCount++;
@@ -54,6 +55,7 @@ public class ReconciliationServiceImpl implements ReconciliationService {
             }
             if (!foundMatch) {
                 transaction.setStatus("UNMATCHED");
+                transaction.setBankTransaction(null);
                 unmatchedCount++;
             }
             transactionRepository.save(transaction);

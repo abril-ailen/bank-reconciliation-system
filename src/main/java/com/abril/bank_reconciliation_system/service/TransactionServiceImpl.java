@@ -21,9 +21,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionResponse createTransaction(TransactionRequest request) {
-        
+
         Transaction transaction = new Transaction();
-        
+
         transaction.setAmount(request.getAmount());
         transaction.setTransactionDate(request.getTransactionDate());
         transaction.setDescription(request.getDescription());
@@ -38,8 +38,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponse getTransactionById(Long id) {
         Transaction transaction = transactionRepository.findById(id).orElseThrow(
-            ()-> new ResourceNotFoundException("Transaction not found")
-        );
+                () -> new ResourceNotFoundException("Transaction not found"));
         return toResponse(transaction);
     }
 
@@ -58,7 +57,10 @@ public class TransactionServiceImpl implements TransactionService {
         response.setDescription(transaction.getDescription());
         response.setStatus(transaction.getStatus());
 
+        response.setBankTransactionId(transaction.getBankTransaction() != null
+                        ? transaction.getBankTransaction().getId() : null);
+
         return response;
     }
-    
+
 }
